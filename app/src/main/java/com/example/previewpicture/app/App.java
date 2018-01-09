@@ -3,7 +3,7 @@ package com.example.previewpicture.app;
 import android.app.Application;
 
 import com.example.previewpicture.imp.TestImageLoader;
-import com.previewlibrary.ZoomMediaLoader;
+import com.previewlibrary.GPreviewLoader;
 
 /**
  * Created by yangc on 2017/9/4.
@@ -15,6 +15,6 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        ZoomMediaLoader.getInstance().init(new TestImageLoader());
+        GPreviewLoader.getInstance().init(new TestImageLoader());
     }
 }

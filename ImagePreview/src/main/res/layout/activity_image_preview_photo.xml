@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.previewlibrary.widget.PhotoViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/text_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_vertical"
+        android:layout_margin="12dp"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <com.previewlibrary.widget.BezierBannerView
+        android:id="@+id/bezierBannerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_vertical|center_horizontal"
+        android:paddingBottom="10dp"
+        android:visibility="gone"
+        app:bezier_banner_selectedColor="@android:color/white"
+        app:bezier_banner_selectedRadius="4dp"
+        app:bezier_banner_spacing="6dp"
+        app:bezier_banner_unSelectedColor="@android:color/darker_gray"
+        app:bezier_banner_unSelectedRadius="4dp" />
+
+</FrameLayout>

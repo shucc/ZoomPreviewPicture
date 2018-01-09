@@ -15,10 +15,8 @@
         android:layout_gravity="bottom|center_vertical"
         android:layout_margin="12dp"
         android:gravity="center"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
         android:text="1/2"
-         >
-    </TextView>
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
 
 </FrameLayout>

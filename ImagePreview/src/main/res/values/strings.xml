@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ImagePreviewLibrary</string>
+    <string name="image_preview_count">%1$s/%2$s</string>
+</resources>

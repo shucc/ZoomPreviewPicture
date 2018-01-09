@@ -11,22 +11,22 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
 import com.example.previewpicture.R;
-import com.example.previewpicture.list.ListView2Activity;
 import com.example.previewpicture.nine.entity.Post;
 import com.jaeger.ninegridimageview.ItemImageClickListener;
 import com.jaeger.ninegridimageview.NineGridImageView;
 import com.jaeger.ninegridimageview.NineGridImageViewAdapter;
-import com.previewlibrary.GPreviewActivity;
 import com.previewlibrary.GPreviewBuilder;
-import com.previewlibrary.enitity.ThumbViewInfo;
+import com.previewlibrary.model.ThumbViewInfoModel;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Jaeger on 16/2/24.
- *
+ * <p>
  * Email: chjie.jaeger@gmail.com
  * GitHub: https://github.com/laobie
  */
@@ -64,7 +64,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     public class PostViewHolder extends RecyclerView.ViewHolder {
         private NineGridImageView<String> mNglContent;
         private TextView mTvContent;
-        private ArrayList<ThumbViewInfo> mThumbViewInfoList = new ArrayList<>();
+        private ArrayList<ThumbViewInfoModel> mThumbViewInfoList = new ArrayList<>();
         private NineGridImageViewAdapter<String> mAdapter = new NineGridImageViewAdapter<String>() {
             @Override
             protected void onDisplayImage(Context context, ImageView imageView, String s) {
@@ -84,8 +84,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
         public PostViewHolder(View itemView) {
             super(itemView);
-            mTvContent = (TextView) itemView.findViewById(R.id.tv_content);
-            mNglContent = (NineGridImageView<String>) itemView.findViewById(R.id.ngl_images);
+            mTvContent = itemView.findViewById(R.id.tv_content);
+            mNglContent = itemView.findViewById(R.id.ngl_images);
             mNglContent.setAdapter(mAdapter);
             mNglContent.setItemImageClickListener(new ItemImageClickListener<String>() {
                 @Override
@@ -100,21 +100,23 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                 }
             });
         }
+
         /**
          * 查找信息
+         *
          * @param list 图片集合
          */
         private void computeBoundsBackward(List<String> list) {
-            ThumbViewInfo item;
+            ThumbViewInfoModel item;
             mThumbViewInfoList.clear();
-            for (int i = 0;i < mNglContent.getChildCount(); i++) {
+            for (int i = 0; i < mNglContent.getChildCount(); i++) {
                 View itemView = mNglContent.getChildAt(i);
                 Rect bounds = new Rect();
                 if (itemView != null) {
                     ImageView thumbView = (ImageView) itemView;
                     thumbView.getGlobalVisibleRect(bounds);
                 }
-                item=new ThumbViewInfo(list.get(i));
+                item = new ThumbViewInfoModel(list.get(i));
                 item.setBounds(bounds);
                 mThumbViewInfoList.add(item);
             }
@@ -122,9 +124,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         }
 
         public void bind(Post post) {
+
             mNglContent.setImagesData(post.getImgUrlList());
             mTvContent.setText(post.getContent());
-
             Log.d("jaeger", "九宫格高度: " + mNglContent.getMeasuredHeight());
             Log.d("jaeger", "item 高度: " + itemView.getMeasuredHeight());
         }

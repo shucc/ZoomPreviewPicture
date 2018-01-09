@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BezierBannerView">
+        <attr name="bezier_banner_selectedColor" format="color" />
+        <attr name="bezier_banner_unSelectedColor" format="color" />
+        <attr name="bezier_banner_selectedRadius" format="dimension" />
+        <attr name="bezier_banner_unSelectedRadius" format="dimension" />
+        <attr name="bezier_banner_spacing" format="dimension" />
+    </declare-styleable>
+</resources>
