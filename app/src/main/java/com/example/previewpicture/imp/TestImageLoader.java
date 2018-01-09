@@ -19,7 +19,6 @@ import com.previewlibrary.loader.IGPreviewLoader;
  * E-Mail:yangchaojiang@outlook.com
  * Deprecated:
  */
-
 public class TestImageLoader implements IGPreviewLoader {
 
     @Override

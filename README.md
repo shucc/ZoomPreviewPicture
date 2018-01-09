@@ -19,19 +19,19 @@
 
 通过Gradle抓取:
 ```
-    repositories {
-        jcenter()
-        maven { url "https://jitpack.io" }
-    }
+repositories {
+    jcenter()
+    maven { url "https://jitpack.io" }
+}
 ```
 ```grade
-  compile 'com.ycjiang:ImagePreview:2.0.0'
+implementation 'com.github.shucc:ZoomPreviewPicture:v2.0.1'
 ```
  
 ###  1.本项目类库依赖第三库
 ```
-    compile 'com.github.chrisbanes.photoview:library:1.3.1'
-      compile 'com.android.support:support-fragment:25.3.1'
+implementation 'com.github.chrisbanes:PhotoView:1.3.1'
+implementation 'com.android.support:appcompat-v7:27.0.2'
 ```
 ### 2.示例代码
  1.使用方式
@@ -54,7 +54,7 @@
             @Override
             public void SimpleOnItemClick(BaseQuickAdapter baseQuickAdapter, View view, int position) {
               //在你点击时，调用computeBoundsBackward（）方法
-                computeBoundsBackward(mGridLayoutManager.findFirstVisibleItemPosition());
+              computeBoundsBackward(mGridLayoutManager.findFirstVisibleItemPosition());
               GPreviewBuilder.from(RecycleViewActivity.this)
                                 .setData(mThumbViewInfoList)
                                 .setCurrentIndex(position)
@@ -62,6 +62,7 @@
                                 .start();
             }
         });
+     
     /**
      ** 查找信息
      * 从第一个完整可见item逆序遍历，如果初始位置为0，则不执行方法内循环
@@ -80,77 +81,122 @@
 ````
   2.构造实体类： 你的实体类实现IThumbViewInfo接口
  `````
- public class UserViewInfo implements IThumbViewInfo {
-     private String url;  //图片地址
-     private Rect mBounds; // 记录坐标
-     private String user;//
- 
-     public UserViewInfo(String url) {
-         this.url = url;
-     }
- 
-     @Override
-     public String getUrl() {//将你的图片地址字段返回
-         return url;
-     }
-     public void setUrl(String url) {
-         this.url = url;
-     }
-     @Override
-     public Rect getBounds() {//将你的图片显示坐标字段返回
-         return mBounds;
-     }
-     
-     public void setBounds(Rect bounds) {
-         mBounds = bounds;
-     }
-    } 
+public class UserViewInfo implements IThumbViewInfoModel {
+
+    private String url;  //图片地址
+    private Rect mBounds; // 记录坐标
+    private String user = "用户字段";
+
+    public UserViewInfo(String url) {
+        this.url = url;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    @Override
+    public String getUrl() {//将你的图片地址字段返回
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @Override
+    public Rect getBounds() {//将你的图片显示坐标字段返回
+        return mBounds;
+    }
+
+    public void setBounds(Rect bounds) {
+        mBounds = bounds;
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.url);
+        dest.writeParcelable(this.mBounds, 0);
+    }
+
+    protected UserViewInfo(Parcel in) {
+        this.url = in.readString();
+        this.mBounds = in.readParcelable(Rect.class.getClassLoader());
+    }
+
+    public static final Creator<UserViewInfo> CREATOR = new Creator<UserViewInfo>() {
+        public UserViewInfo createFromParcel(Parcel source) {
+            return new UserViewInfo(source);
+        }
+
+        public UserViewInfo[] newArray(int size) {
+            return new UserViewInfo[size];
+        }
+    };
+}
  `````
 
 ### 3.使用自定义图片加载配置  **注意这个必须实现哦。不然加载**
-   * 1在你项目工程，创建一个类 实现接口IZoomMediaLoader接口 如下代码
+   * 1在你项目工程，创建一个类 实现接口IGPreviewLoader接口 如下代码
        demo 采用glide ，可以使用Picassor Imagloader 图片加载框架
 ````
-public class TestImageLoader implements IZoomMediaLoader {
+public class TestImageLoader implements IGPreviewLoader {
+
     @Override
-    public void displayImage(Fragment context, String path, final MySimpleTarget<Bitmap> simpleTarget) {
-         Glide.with(context).load(path).asBitmap().centerCrop().diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                      .error(R.drawable.ic_default_image)
-                      .into(new SimpleTarget<Bitmap>() {
-                          @Override
-                          public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                              simpleTarget.onResourceReady(resource);
-                          }
-                          @Override
-                          public void onLoadStarted(Drawable placeholder) {
-                              super.onLoadStarted(placeholder);
-                              simpleTarget.onLoadStarted();
-                          }
-      
-                          @Override
-                          public void onLoadFailed(Exception e, Drawable errorDrawable) {
-                              super.onLoadFailed(e, errorDrawable);
-                              simpleTarget.onLoadFailed(errorDrawable);
-                          }
-                      });
+    public void displayImage(@NonNull Fragment context, @NonNull String path, final @NonNull GPreviewTarget<Bitmap> simpleTarget) {
+        Glide.with(context).load(path).asBitmap().centerCrop().diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .error(R.drawable.ic_default_image)
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                        simpleTarget.onResourceReady(resource);
+                    }
+
+                    @Override
+                    public void onLoadStarted(Drawable placeholder) {
+                        super.onLoadStarted(placeholder);
+                        simpleTarget.onLoadStarted();
+
+                    }
+
+                    @Override
+                    public void onLoadFailed(Exception e, Drawable errorDrawable) {
+                        super.onLoadFailed(e, errorDrawable);
+                        simpleTarget.onLoadFailed(errorDrawable);
+                    }
+                });
     }
-     @Override
-     public void onStop(@NonNull Fragment context) {
-           Glide.with(context).onStop();
-     }
-     @Override
-     public void clearMemory(@NonNull Context c) {
-              Glide.get(c).clearMemory();
-     }
+
+    @Override
+    public void onStop(@NonNull Fragment context) {
+        Glide.with(context).onStop();
+
+    }
+
+    @Override
+    public void clearMemory(@NonNull Context c) {
+        Glide.get(c).clearMemory();
+    }
+}
 
 ````
   * 2注册 你实现自定义类，在你 app onCreate() 中
 ````
-    @Override
-      public void onCreate() {
-          super.onCreate();
-          ZoomMediaLoader.getInstance().init(new TestImageLoader());
-      }
+@Override
+public void onCreate() {
+  super.onCreate();
+  GPreviewLoader.getInstance().init(new TestImageLoader());
+}
 ````
 ### 4.自定义Activity,Fragment
  1.实现自定义Activity，实现你业务操作例如加入标题栏，ViewPager切换动画等等
