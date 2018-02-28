@@ -10,8 +10,8 @@ import com.previewlibrary.GPreviewLoader;
  * E-Mail:yangchaojiang@outlook.com
  * Deprecated:
  */
-
 public class App extends Application {
+
     @Override
     public void onCreate() {
         super.onCreate();

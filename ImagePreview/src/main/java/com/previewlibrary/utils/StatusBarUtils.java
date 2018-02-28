@@ -1,4 +1,4 @@
-package com.previewlibrary.util;
+package com.previewlibrary.utils;
 
 import android.content.Context;
 import android.os.Build;
@@ -9,7 +9,7 @@ import com.previewlibrary.R;
  * Created by shucc on 17/12/12.
  * cc@cchao.org
  */
-public class StatusBarUtil {
+public class StatusBarUtils {
 
     /**
      * 取状态栏高度

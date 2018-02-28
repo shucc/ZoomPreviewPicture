@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.previewpicture.nine.ViewServer;
 
-
 /**
  * Created by Jaeger on 16/9/7.
  * <p>

@@ -8,7 +8,6 @@ import java.util.List;
  * <p/>
  * Created by woxingxiao on 2016-10-24.
  */
-
 public final class ImageUrlConfig {
 
     private static List<String> sUrls = new ArrayList<>();

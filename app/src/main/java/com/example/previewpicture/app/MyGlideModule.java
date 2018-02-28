@@ -17,6 +17,7 @@ import com.example.previewpicture.R;
  * GlideModule 图片加载缓存
  */
 public class MyGlideModule implements GlideModule {
+
     public static int cacheSize100MegaBytes = 504857600;
 
     @Override

@@ -196,7 +196,6 @@ public class BezierBannerView extends View implements ViewPager.OnPageChangeList
         canvas.drawPath(mPath, mCirclePaint);
 
         canvas.restore();
-
     }
 
     /**

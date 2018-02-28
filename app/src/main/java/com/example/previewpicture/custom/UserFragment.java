@@ -16,7 +16,6 @@ import com.previewlibrary.GPreviewFragment;
  * E-Mail:yangchaojiang@outlook.com
  * Deprecated:
  */
-
 public class UserFragment extends GPreviewFragment {
     /****用户具体数据模型***/
     private UserViewInfo b;

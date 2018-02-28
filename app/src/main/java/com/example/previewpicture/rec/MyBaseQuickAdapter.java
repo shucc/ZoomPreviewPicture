@@ -9,13 +9,11 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.previewpicture.R;
 import com.example.previewpicture.bean.UserViewInfo;
 
-
 /**
  * Created by yangc on 2017/8/29.
  * E-Mail:yangchaojiang@outlook.com
  * Deprecated:
  */
-
 public class MyBaseQuickAdapter extends BaseQuickAdapter<UserViewInfo, BaseViewHolder> {
     public static final String TAG = "MyBaseQuickAdapter";
     private Context context;

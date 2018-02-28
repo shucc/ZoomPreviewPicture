@@ -28,7 +28,7 @@ public class GridView2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grid);
-        listView = (GridView) findViewById(R.id.listView);
+        listView = findViewById(R.id.listView);
         //准备数据
         List<String> urls = ImageUrlConfig.getUrls();
         for (int i = 0; i < urls.size(); i++) {
@@ -86,7 +86,7 @@ public class GridView2Activity extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View view = getLayoutInflater().inflate(R.layout.item_image, null);
-            ImageView iv = (ImageView) view.findViewById(R.id.iv);
+            ImageView iv = view.findViewById(R.id.iv);
             Glide.with(GridView2Activity.this)
                     .load(mThumbViewInfoList.get(position).getUrl())
                     .error(R.mipmap.ic_iamge_zhanwei)

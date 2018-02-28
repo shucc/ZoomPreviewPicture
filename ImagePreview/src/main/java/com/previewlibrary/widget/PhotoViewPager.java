@@ -13,7 +13,6 @@ import android.view.MotionEvent;
  *         https://github.com/chrisbanes/PhotoView
  *         Issues With ViewGroups
  */
-
 public class PhotoViewPager extends ViewPager {
 
     public PhotoViewPager(Context context) {

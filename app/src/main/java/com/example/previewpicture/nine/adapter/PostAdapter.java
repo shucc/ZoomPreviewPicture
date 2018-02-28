@@ -131,5 +131,4 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             Log.d("jaeger", "item 高度: " + itemView.getMeasuredHeight());
         }
     }
-
 }

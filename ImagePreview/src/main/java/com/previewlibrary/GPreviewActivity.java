@@ -87,7 +87,6 @@ public class GPreviewActivity extends FragmentActivity {
         } catch (Exception e) {
             iniFragment(imgUrls, currentIndex, GPreviewFragment.class);
         }
-
     }
 
     /**

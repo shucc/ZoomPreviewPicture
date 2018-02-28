@@ -23,9 +23,6 @@ import java.util.List;
  */
 public class GridStyleActivity extends BaseActivity {
 
-    private RecyclerView mRvPostLister;
-    private PostAdapter mNineImageAdapter;
-    private List<Post> mPostList;
     private String[] IMG_URL_LIST = {
             "http://ac-QYgvX1CC.clouddn.com/36f0523ee1888a57.jpg", "http://ac-QYgvX1CC.clouddn.com/07915a0154ac4a64.jpg",
             "http://ac-QYgvX1CC.clouddn.com/9ec4bc44bfaf07ed.jpg", "http://ac-QYgvX1CC.clouddn.com/fa85037f97e8191f.jpg",
@@ -40,10 +37,10 @@ public class GridStyleActivity extends BaseActivity {
         this.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         setContentView(R.layout.activity_recycler);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
-        mRvPostLister = findViewById(R.id.rv_post_list);
+        RecyclerView mRvPostLister = findViewById(R.id.rv_post_list);
         final LinearLayoutManager manager = new LinearLayoutManager(this);
         mRvPostLister.setLayoutManager(manager);
-        mPostList = new ArrayList<>();
+        List<Post> mPostList = new ArrayList<>();
         for (int i = 0; i < 18; i++) {
             List<String> imgUrls = new ArrayList<>();
             imgUrls.addAll(Arrays.asList(IMG_URL_LIST).subList(0, i % 9));
@@ -51,7 +48,7 @@ public class GridStyleActivity extends BaseActivity {
             mPostList.add(post);
         }
 
-        mNineImageAdapter = new PostAdapter(this, mPostList, NineGridImageView.STYLE_GRID);
+        PostAdapter mNineImageAdapter = new PostAdapter(this, mPostList, NineGridImageView.STYLE_GRID);
         mRvPostLister.setAdapter(mNineImageAdapter);
         manager.scrollToPositionWithOffset(5, 0);
         mRvPostLister.post(new Runnable() {

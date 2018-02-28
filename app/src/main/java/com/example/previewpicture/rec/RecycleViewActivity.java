@@ -18,8 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecycleViewActivity extends Activity {
+
     private ArrayList<UserViewInfo> mThumbViewInfoList = new ArrayList<>();
+
     private GridLayoutManager mGridLayoutManager;
+
     private RecyclerView mRecyclerView;
 
     @Override
@@ -55,8 +58,6 @@ public class RecycleViewActivity extends Activity {
                         .start();
             }
         });
-
-
     }
 
     /**

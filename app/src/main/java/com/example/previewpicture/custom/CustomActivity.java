@@ -7,13 +7,11 @@ import android.view.View;
 import com.example.previewpicture.R;
 import com.previewlibrary.GPreviewActivity;
 
-
 /**
  * Created by yangc on 2017/9/19.
  * E-Mail:yangchaojiang@outlook.com
  * Deprecated:
  */
-
 public class CustomActivity extends GPreviewActivity {
     /***
      * 重复该方法 *使用你的自定义布局

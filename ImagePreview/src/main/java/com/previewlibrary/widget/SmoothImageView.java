@@ -17,7 +17,7 @@ import android.view.MotionEvent;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 
-import com.previewlibrary.util.StatusBarUtil;
+import com.previewlibrary.utils.StatusBarUtils;
 
 import uk.co.senab.photoview.PhotoView;
 
@@ -439,7 +439,7 @@ public class SmoothImageView extends PhotoView {
             thumbRect = new Rect();
         }
         startTransform.left = thumbRect.left;
-        startTransform.top = thumbRect.top - StatusBarUtil.getStatusBarHeight(getContext().getApplicationContext());
+        startTransform.top = thumbRect.top - StatusBarUtils.getStatusBarHeight(getContext().getApplicationContext());
         startTransform.width = thumbRect.width();
         startTransform.height = thumbRect.height();
         //开始时以CenterCrop方式显示，缩放图片使图片的一边等于起始区域的一边，另一边大于起始区域

@@ -20,15 +20,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListView2Activity extends AppCompatActivity {
+
     private ArrayList<UserViewInfo> mThumbViewInfoList = new ArrayList<>();
-    ListView listView;
+
+    private ListView listView;
+
     private MyListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
-        listView = (ListView) findViewById(R.id.listView);
+        listView = findViewById(R.id.listView);
         //准备数据
         List<String> urls = ImageUrlConfig.getUrls();
         for (int i = 0; i < urls.size(); i++) {
@@ -59,7 +62,7 @@ public class ListView2Activity extends AppCompatActivity {
             View itemView = listView.getChildAt(i - firstCompletelyVisiblePos);
             Rect bounds = new Rect();
             if (itemView != null) {
-                ImageView thumbView = (ImageView) itemView.findViewById(R.id.iv);
+                ImageView thumbView = itemView.findViewById(R.id.iv);
                 thumbView.getGlobalVisibleRect(bounds);
             }
             mThumbViewInfoList.get(i).setBounds(bounds);
@@ -86,7 +89,7 @@ public class ListView2Activity extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View view = getLayoutInflater().inflate(R.layout.item_image, null);
-            ImageView iv = (ImageView) view.findViewById(R.id.iv);
+            ImageView iv = view.findViewById(R.id.iv);
             Glide.with(ListView2Activity.this)
                     .load(mThumbViewInfoList.get(position).getUrl())
                     .error(R.mipmap.ic_iamge_zhanwei)
@@ -95,5 +98,4 @@ public class ListView2Activity extends AppCompatActivity {
             return view;
         }
     }
-
 }
